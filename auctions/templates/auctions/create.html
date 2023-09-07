@@ -1,0 +1,36 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <section class="mt-5">
+        <h2 class="text-center mb-4">Create New Listing</h2>
+
+        <form action="{% url 'create' %}" method="POST" class="mx-auto" style="max-width: 600px;">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="title" class="text-white">Title</label>
+                <input type="text" name="title" class="form-control bg-dark text-white" id="title" placeholder="Enter title">
+            </div>
+            <div class="form-group">
+                <label for="description" class="text-white">Description</label>
+                <textarea name="description" class="form-control bg-dark text-white" id="description" placeholder="Enter description" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="imageurl" class="text-white">Image URL</label>
+                <input type="text" name="imageurl" class="form-control bg-dark text-white" id="imageurl" placeholder="Enter image URL">
+            </div>
+            <div class="form-group">
+                <label for="price" class="text-white">Price</label>
+                <input type="number" min="0" name="price" class="form-control bg-dark text-white" id="price" placeholder="Enter price">
+            </div>
+            <div class="form-group">
+                <label for="category" class="text-white">Choose a category:</label>
+                <select name="category" id="category" class="custom-select bg-dark text-white">
+                    {% for cat in categories %}
+                        <option value="{{ cat }}">{{ cat }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-success w-100">Create New Listing!</button>
+        </form>
+    </section>
+{% endblock %}
